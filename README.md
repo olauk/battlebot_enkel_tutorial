@@ -1,14 +1,10 @@
 
 > Åpne denne siden på [https://olauk.github.io/battlebot_enkel_tutorial/](https://olauk.github.io/battlebot_enkel_tutorial/)
 
-## Bruk som utvidelse
+## Tutorials
 
-Dette kodeområdet kan bli lagt til som en **utvidelse** i MakeCode.
-
-* åpne [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* klikk på **Nytt prosjekt**
-* klikk på **Utvidelser** i menyen under tannhjulet
-* søk etter **https://github.com/olauk/battlebot_enkel_tutorial** og importér
+* [tutorial]
+* [start tutorial]
 
 ## Rediger dette prosjektet ![Bygg statusmerke](https://github.com/olauk/battlebot_enkel_tutorial/workflows/MakeCode/badge.svg)
 
