@@ -44,14 +44,12 @@ radio.onReceivedNumber(function (receivedNumber) {
 ```
 
 ### Steg 3
-
-Hent to blokker av ``||DF-Driver:Motor M1 dir CW speed||`` fra kategorien DF-Driver. Plasser begge blokkene under hvis receivedNumber = 0. Endre den ene blokken slik at den sier ``||DF-Driver:Motor M2 dir CW speed||``
+Når battlebot får tallet 0 fra fjernkontrollen skal den stoppe. Vi kan da bruke blokken ``||DF-Driver:Motor stop all||`` fra kategorien DF-Driver.
 
 ```blocks
 radio.onReceivedNumber(function (receivedNumber) {
     if (receivedNumber == 0) {
-        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 0)
-        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 0)
+        motor.motorStopAll()
     } else {
     	
     }
@@ -59,28 +57,55 @@ radio.onReceivedNumber(function (receivedNumber) {
 ```
 
 ### Steg 5
-Vi skal nå gjøre det samme for å snu til høyre:   
-Hent ``||input:når ristes||`` fra inndata. Endre denne til ``||input:når helning høyre||`` Hent ``||radio:radio send tall||`` fra radio. Velg selv hvilket tall som skal bety snu til høyre.
+Vi legger så inn nye sammenligningsblokker for verdiene 1 og 2 - fremover og bakover.   
+Hent to blokker av ``||DF-Driver:Motor M1 dir CW speed||`` fra kategorien DF-Driver. Plasser begge blokkene under hvis receivedNumber = 1. Endre den ene blokken slik at den sier ``||DF-Driver:Motor M2 dir CW speed||``
+Her må dere velge rotasjon som stemmer med motorene slik de er montert på deres battlebot. CW står for ClockWise og CCW CounterClockWise.   
+Motorene kan være montert slik at de går i motsatt retning selv om det i koden står CW på både motor 1 og 2. Gjør nødvendige endringer i programmet slik at det blir riktig for dere.
 
 ```blocks
-input.onGesture(Gesture.TiltLeft, function () {
-    radio.sendNumber(3)
-})
-input.onGesture(Gesture.TiltRight, function () {
-    radio.sendNumber(4)
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 0) {
+        motor.motorStopAll()
+    } else if (receivedNumber == 1) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 150)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 150)
+    } else if (receivedNumber == 2) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, 150)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, 150)
+    } else{    	
+    }
 })
 ```
 
-### Stopp @unplugged
-Det er lurt å ha en mulighet for å stoppe battleboten.
-Dette kan gjøres på ulike måter. Vi viser her hvordan dere kan gjøre det ved å bruke ``||input:når knapp A trykkes||``
-
 ### Steg 6
-Hent ``||input:når knapp A trykkes||`` fra inndata. Hent ``||radio:radio send tall||`` fra radio. Velg selv hvilket tall som skal bety stopp.
+Vi legger så inn nye sammenligningsblokker for verdiene 3 og 4 - snu til venstre og snu til høyre.
+Hent inn to motorblokker for hver verdi. Legg nå merke til at motorene settes til å gå motsatt retning av hverandre. Her vil det være mulig å justere hvor fort battleboten spinner ved å endre på hastigheten til en eller begge motorene. 
 ```blocks
-input.onButtonPressed(Button.AB, function () {
-    radio.sendNumber(0)
+radio.onReceivedNumber(function (receivedNumber) {
+    if (receivedNumber == 0) {
+        motor.motorStopAll()
+    } else if (receivedNumber == 1) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 150)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, 150)
+    } else if (receivedNumber == 2) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, 150)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 150)
+    } else if (receivedNumber == 3) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CCW, 70)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CCW, 150)
+    } else if (receivedNumber == 4) {
+        motor.MotorRun(motor.Motors.M1, motor.Dir.CW, 150)
+        motor.MotorRun(motor.Motors.M2, motor.Dir.CW, 70)
+    }
 })
+```
+### Steg 7
+
+Sett radiogruppe. For at fjernkontroll og battlebot skal kunne motta signaler fra hverandre må begge microbit være i samme radiogruppe.   
+Hent ``||radio:sett radiogruppe||`` fra radio og sett gruppenummere til det samme som dere valgte i fjernkontrollprogrammet.
+
+```blocks
+radio.setGroup(xx)
 ```
 
 ```package
