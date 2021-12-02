@@ -3,8 +3,8 @@
 
 ## Tutorials
 
-* [tutorial]
-* [start tutorial]
+* [tutorial](/tutorial)
+* [start tutorial](https://makecode.microbit.org/#tutorial:github:olauk/battlebot_enkel_tutorial/tutorial)
 
 ## Rediger dette prosjektet ![Bygg statusmerke](https://github.com/olauk/battlebot_enkel_tutorial/workflows/MakeCode/badge.svg)
 
